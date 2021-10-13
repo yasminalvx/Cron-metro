@@ -21,13 +21,19 @@ namespace Stopwatch
             Console.WriteLine("Exemplo de formato:");
             Console.WriteLine("1h 10m 40s => 1 hora, 10 minutos e 40 segundos");
 
-            string data = Console.ReadLine().ToLower();
+            string time = Console.ReadLine().ToLower(); //tempo string
             
+            CalcularTempo(time);
+        }
+
+        static void CalcularTempo(string time) 
+        {
             int posH = 0, posM = 0, posS = 0;
             int tamH = 0, tamM = 0, tamS = 0;
 
-            for (int i = 0; i < data.Length; i++) {
-                char caractere = data[i];
+            for (int i = 0; i < time.Length; i++) 
+            {
+                char caractere = time[i];
                 if (caractere == 'h') {posH = i; tamH = posH - 0;}
                 if (caractere == 'm') {posM = i; tamM = posM - (posH + 2);}
                 if (caractere == 's') {posS = i; tamS = posS - (posM + 2);}
@@ -35,15 +41,13 @@ namespace Stopwatch
 
             int hora = 0, minuto = 0, segundo = 0;
 
-            if(posH > 0) hora = int.Parse(data.Substring(0, tamH));
-            if(posM > 0) minuto = int.Parse(data.Substring(posH+2, tamM));
-            if(posS > 0) segundo = int.Parse(data.Substring(posM+2, tamS));
+            if(posH > 0) hora = int.Parse(time.Substring(0, tamH));
+            if(posM > 0) minuto = int.Parse(time.Substring(posH+2, tamM));
+            if(posS > 0) segundo = int.Parse(time.Substring(posM+2, tamS));
 
             int tempo = segundo + 60*minuto + 360*hora;
 
             Start(tempo);
-
-            Console.WriteLine($"{hora}h {minuto}m {segundo}s");
         }
 
         static void Start(int time) 
