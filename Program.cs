@@ -28,9 +28,10 @@ namespace Stopwatch
 
         static void CalcularTempo(string time) 
         {
-            int posH = 0, posM = 0, posS = 0;
-            int tamH = 0, tamM = 0, tamS = 0;
+            int posH = 0, posM = 0, posS = 0; //posição de h, m e s na string
+            int tamH = 0, tamM = 0, tamS = 0; //tamanho hora, minuto e segundo
 
+            //obter posições e tamanho da hora, minuto e segundo
             for (int i = 0; i < time.Length; i++) 
             {
                 char caractere = time[i];
@@ -39,6 +40,8 @@ namespace Stopwatch
                 if (caractere == 's') {posS = i; tamS = posS - (posM + 2);}
             }
 
+
+            //tranformar partes da string pra inteiro, extraindo cada unidades de tempo
             int hora = 0, minuto = 0, segundo = 0;
 
             if(posH > 0) hora = int.Parse(time.Substring(0, tamH));
@@ -50,26 +53,29 @@ namespace Stopwatch
             Start(tempo);
         }
 
-        static void Start(int time) 
+        static void Start(int time) //time = tempo total em segundos
         {
-            int currentTime = 0;
-            int timeS = 0, timeM = 0, timeH = 0;
+            int currentTime = 0;                 //tempo percorrido em segundos. 
+            int timeS = 0, timeM = 0, timeH = 0; //tempo em segundo, minuto e hora
 
-            while (currentTime != time) 
+            //enquanto o tempo percorrido for diferente do tempo inserido + 1 segundo, pois vai iniciar em zero
+            while (currentTime != (time + 1)) 
             {
                 Console.Clear();
                 currentTime++;
-                if (timeS == 60) {timeS = 0; timeM++;}
-                if (timeM == 60) {timeM = 0; timeH++;}
+
+                if (timeS == 60) {timeS = 0; timeM++;} //60 segundos = 1 minuto
+                if (timeM == 60) {timeM = 0; timeH++;} //60 minutos = 1 hora
 
                 Console.WriteLine(timeH + ":" + timeM + ":" + timeS);
 
-                Thread.Sleep(1000); //dormir 1 segundo
-                
-                timeS++;
-            }
+                Thread.Sleep(1000); //espera 1 segundo
 
-            Console.Clear();
+                timeS++;
+                
+            } 
+
+            Thread.Sleep(1000);
             Console.WriteLine("Stopwatch finalizado!");
             Thread.Sleep(5000);
         }
