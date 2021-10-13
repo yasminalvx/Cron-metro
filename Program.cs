@@ -1,4 +1,8 @@
-﻿using System;
+﻿//Program.cs
+//O programa executa um cronômetro em tempo real
+//O usuário insere o tempo final e o cronômetro inicia
+
+using System;
 using System.Threading;
 
 namespace Stopwatch
